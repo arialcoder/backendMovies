@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public interface IPeliculaPersistencia {
 
-   // void guardarPeliculas(ArrayList<Pelicula> peliculas);
+    void guardarPelicula(Pelicula pelicula);
 
     ArrayList<Pelicula> getAllMovies();
     Pelicula findByTitulo(String titulo);
@@ -16,6 +16,6 @@ public interface IPeliculaPersistencia {
    // void actualizarTitulo(String tituloNuevo, String anio);
 
     // Elimina Pelicua segun el ID
-   // void borrarPelicula(int id);
+    void borrarPelicula(int id);
 
 }

@@ -100,6 +100,8 @@ public class MySQLPersistenciaImpl implements IPersistencia, IPeliculaPersistenc
     }
 
 
+
+    // Metodos para gestion de peliculas
     @Override
     public ArrayList<Pelicula> getAllMovies() {
 
@@ -151,4 +153,35 @@ public class MySQLPersistenciaImpl implements IPersistencia, IPeliculaPersistenc
             }
             return null;
         }
+
+
+    @Override
+    public void guardarPelicula(Pelicula pelicula) {
+        String sql ="INSERT INTO movies(titulo,anio,director,genero) values(?,?,?,?)";
+        try {
+            PreparedStatement preparador = this.conexion.prepareStatement(sql);
+            preparador.setString(1, pelicula.getTitulo());
+            preparador.setString(2, pelicula.getAnio());
+            preparador.setString(3, pelicula.getDirector());
+            preparador.setString(4, pelicula.getGenero());
+            preparador.executeUpdate();
+            preparador.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void borrarPelicula(int id) {
+        String sql = "DELETE FROM movies WHERE id=?";
+
+        PreparedStatement preparador = null;
+        try {
+            preparador = this.conexion.prepareStatement(sql);
+            preparador.setInt(1,id);
+            preparador.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

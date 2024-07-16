@@ -69,4 +69,18 @@ public class UsuarioController extends HttpServlet {
         resp.setStatus(HttpServletResponse.SC_OK);
     }
 
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String idString = req.getParameter("id");
+
+        if(idString !=null && !idString.isEmpty()){
+            int id = Integer.parseInt(idString);
+            service.deleteUser(id);
+            resp.setStatus(200);
+        }else{
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.getWriter().write("ID DE USUARIO INVALIDO");
+        }
+    }
 }
